@@ -7,6 +7,26 @@ The reasoning behind every structural decision is in [`STRATEGY.md`](STRATEGY.md
 
 ---
 
+## Live draft for client review
+
+**<https://ryanctwomey14-ai.github.io/Mallardlegacy/>**
+
+Served from the `gh-pages` branch. Redeploy after any change:
+
+```bash
+sh tools/deploy_preview.sh
+```
+
+That script rebuilds the pages, copies `site/` to `gh-pages`, and — importantly —
+**makes the deployed copy non-indexable**: `robots.txt` disallows everything, the
+sitemap is dropped, and every page gets `noindex,nofollow`. This is an unapproved
+draft carrying deal terms the sponsor has not signed off; it must not be crawled,
+and it must not compete with the real domain later. `site/` keeps its production
+robots and meta tags untouched.
+
+When the site goes live on the real domain, deploy from `site/` directly — not
+via this script.
+
 ## Run it locally
 
 ```bash
