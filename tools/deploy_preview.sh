@@ -29,7 +29,7 @@ cd "$WORK"
 touch .nojekyll
 
 cat > robots.txt <<'EOF'
-# Client review draft — not for indexing.
+# Client review draft - not for indexing.
 User-agent: *
 Disallow: /
 EOF
