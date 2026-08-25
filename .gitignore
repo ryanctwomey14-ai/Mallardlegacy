@@ -1,0 +1,16 @@
+# OS
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# Editor / tooling
+.claude/
+*.log
+
+# Local preview build (regenerate with tools/bundle_artifact.py)
+site/_review.html
+mallard-review.html
+
+# Python
+__pycache__/
+*.pyc
