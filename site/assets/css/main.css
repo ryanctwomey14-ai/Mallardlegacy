@@ -333,7 +333,12 @@ a[href^="mailto:"],a[href^="tel:"]{overflow-wrap:anywhere}
 /* The hero goes two-column at 1000px, so the headline column narrows faster
    than a viewport-based clamp shrinks the type. Step it down across that band. */
 @media (min-width:1000px) and (max-width:1180px){.hero .display{font-size:3.25rem}}
-@media (max-width:400px){.hero .display{font-size:1.9rem}}
+/* Sized against measured ink width rather than guessed: the longest line
+   needs about 9.5x the font size, and the hero column is roughly the
+   viewport less 55px. Capped at 2.5rem so it never overpowers the card. */
+@media (max-width:560px){
+  .hero .display{font-size:clamp(1.625rem,-0.36rem + 10.5vw,2.5rem)}
+}
 .hero__sub{margin-top:var(--s-4);font-size:var(--step-1);line-height:1.6;
   color:var(--text-muted);max-width:54ch}
 .hero__cta{display:flex;flex-wrap:wrap;gap:var(--s-4);margin-top:var(--s-6)}
@@ -1107,6 +1112,18 @@ a[href^="mailto:"],a[href^="tel:"]{overflow-wrap:anywhere}
   .section--tight{padding-block:var(--s-7)}
   .finalCta__inner{padding-block:var(--s-8)}
   .pageHead__inner{padding-top:calc(88px + var(--s-6));padding-bottom:var(--s-6)}
+}
+
+/* Hero on phones: the video is brighter and busier than the still it
+   replaced, and the old scrim dropped to 0.3 alpha exactly where the
+   headline sits. Hold the wash across the whole text band instead. */
+@media (max-width:899px){
+  .hero__vignette{
+    background:
+      linear-gradient(180deg,rgba(7,29,23,.88) 0%,rgba(7,29,23,.72) 28%,
+                      rgba(7,29,23,.68) 56%,rgba(7,29,23,.94) 100%),
+      radial-gradient(130% 80% at 72% 10%,rgba(30,86,70,.22) 0%,rgba(7,29,23,0) 62%)}
+  .hero__video{filter:brightness(.88) saturate(.92)}
 }
 
 /* ---------- Mobile refinements ----------
