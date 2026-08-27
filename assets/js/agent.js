@@ -35,83 +35,83 @@
      robot and stops being persuasive after the second reply. */
   var KB = [
     { id: 'what', k: ['what do you do','what is mallard','who are you','about mallard','what is this','explain'],
-      a: 'Mallard Legacy Partners buys apartment communities in the Carolinas, improves how they are run, and holds them five to seven years. Investors own a share of the property itself — you receive the rent, the tax depreciation and the loan paydown without managing anything.',
-      cta: 'Want the short version from Seth directly?' },
+      a: 'We buy apartment communities in the Carolinas, run them better, and hold five to seven years. You own a share of the building itself \u2014 rent, depreciation and loan paydown all flow to you. None of the management does.',
+      cta: 'Seth can give you the two-minute version.' },
 
     { id: 'minimum', k: ['minimum','how much','least','smallest','entry','buy in','start with'],
-      a: 'The minimum is <strong>$100,000</strong> per offering. We hold that line so the investor group stays small enough that everyone gets real attention.',
-      cta: 'If that fits your range, a fifteen-minute call is the next step.' },
+      a: '<strong>$100,000</strong> per offering. We keep it there deliberately \u2014 a smaller investor group means you get Seth on the phone, not an associate.',
+      cta: 'Does that sit in your range?' },
 
     { id: 'returns', k: ['return','returns','kind of return','what return','irr','multiple','profit','make','yield','roi','how much will i'],
-      a: 'We underwrite to a <strong>15–17% target IRR</strong> and a <strong>1.8–2.2x equity multiple</strong> over the hold. Those are targets we underwrite toward — not guarantees, not projections, and not based on past results, because Mallard has not completed a deal yet.',
-      cta: 'The calculator on the Strategy page shows what that looks like on your number. Happy to walk through the assumptions on a call.' },
+      a: 'We underwrite to a <strong>15\u201317% IRR</strong> and <strong>1.8\u20132.2x</strong> over the hold.<br><br>Worth being precise: those are thresholds a deal has to clear before we bring it to you. Not guarantees, and not past performance \u2014 we have not closed a deal yet.',
+      cta: 'The Strategy page runs those against your number. Seth will happily pull the assumptions apart with you.' },
 
     { id: 'track', k: ['track record','done this before','experience','past deals','history','how many deals','portfolio','previous'],
-      a: 'Straight answer: we do not have one. Mallard has not closed an acquisition, has no assets under management and has never paid a distribution. Every figure on this site is a target or a stated commitment, never a result.',
-      cta: 'What we do have is a narrow buy box, conservative structure and Seth’s own money in every deal. He would rather explain that himself — shall I point you to his calendar?' },
+      a: 'None. No acquisitions closed, nothing under management, no distributions paid.<br><br>You would be underwriting the operator and the discipline, not a results page. If that sits outside your risk tolerance, this is a reasonable place to stop.',
+      cta: 'If it does not, the conversation is worth fifteen minutes.' },
 
     { id: 'seth', k: ['seth','who runs','founder','manager','team','background','qualified','sponsor'],
-      a: 'Seth Phillips, Founder and Managing Partner. He has been on job sites since he was twelve, spent four years as an industrial mechanic and two as a service engineer on anesthesia equipment, and has been around real estate for ten years — the last two focused entirely on multifamily.',
-      cta: 'He takes every intro call personally. There is no sales team to get past.' },
+      a: 'Seth Phillips runs it. On job sites from twelve, four years an industrial mechanic, two as a service engineer on anesthesia equipment, ten years around real estate and the last two in multifamily full time.<br><br>He reads buildings as systems rather than spreadsheets \u2014 a different instinct from a finance background, and a useful one when you are the person who has to spot what breaks.',
+      cta: 'He takes every intro call himself.' },
 
     { id: 'markets', k: ['where','market','markets','which market','location','city','cities','area','region','state','carolina','greenville','charlotte','columbia','geography'],
-      a: 'Three markets only: <strong>Greenville and Columbia, South Carolina, and Charlotte, North Carolina</strong>. We will not buy outside them — operating close to home means we can inspect properties in person and actually know the submarkets.',
-      cta: 'Seth can talk through why those three, if it is useful.' },
+      a: '<strong>Greenville and Columbia, South Carolina, and Charlotte, North Carolina.</strong> Nowhere else.<br><br>Close enough to walk every property before we bid, and to know which submarkets are actually adding jobs.',
+      cta: 'Happy to talk through why those three.' },
 
     { id: 'hold', k: ['how long','hold','liquid','get my money','withdraw','exit','lock up','timeline','tied up'],
-      a: 'Five to seven years, and you should treat it as illiquid. There is no redemption window and no secondary market. This is the real cost of private real estate — returns come from executing a business plan through a full cycle.',
-      cta: 'If you might need the money sooner, say so on the call and Seth will tell you honestly not to invest.' },
+      a: 'Five to seven years, and genuinely illiquid \u2014 no redemption window, no secondary market.<br><br>That is the trade. The return comes from executing a business plan through a full cycle, which you cannot do with capital that might be recalled.',
+      cta: 'If there is any chance you need it sooner, say so early and Seth will tell you straight.' },
 
     { id: 'fees', k: ['fee','how do you get paid','promote','waterfall','split','preferred','compensation','charge'],
-      a: 'An acquisition fee at closing, an asset management fee on collected revenue, a disposition fee at sale, and a promote that only starts after investors get their capital back plus a preferred return. The exact terms are set per property and disclosed in full before you commit.',
-      cta: 'Seth will walk you line by line through the structure — worth doing on a call.' },
+      a: 'An acquisition fee at close, an asset management fee on collected revenue, a disposition fee at sale, and a promote that only starts once you have your capital back plus a preferred return.<br><br>Exact terms are set per property and disclosed in full before you commit a dollar.',
+      cta: 'Seth will walk the waterfall with you line by line.' },
 
     { id: 'accredited', k: ['accredited','eligible','qualify','can i invest','who can invest','506','requirements'],
-      a: 'Offerings are open to accredited investors only. Most qualify on income — $200,000 individually or $300,000 jointly for the last two years — or on net worth above $1 million excluding your home. Because we use Rule 506(c), a third party verifies it; you never send financial documents to us.',
-      cta: 'Not sure whether you qualify? That is a normal first-call question.' },
+      a: 'Accredited investors only \u2014 income of $200K individually or $300K jointly for the past two years, or net worth above $1M excluding your home.<br><br>We run under Rule 506(c), so a third party verifies it. Your financials never come to us.',
+      cta: 'If you are unsure which test you meet, that is a normal first-call question.' },
 
     { id: 'distributions', k: ['distribution','cash flow','paid','quarterly','income','when do i get','payout'],
-      a: 'Distributions are paid quarterly, beginning the first full quarter after a property stabilises. Properties in heavy renovation may have a reduced or deferred first distribution — always disclosed before you commit a dollar.',
-      cta: 'Seth can show you how the cash flow and sale proceeds split on a real model.' },
+      a: 'Quarterly, starting the first full quarter after a property stabilises.<br><br>Anything in heavy renovation may run a reduced or deferred first distribution \u2014 disclosed up front, never a surprise.',
+      cta: 'Seth can show you how cash and sale proceeds split on a real model.' },
 
     { id: 'tax', k: ['tax','taxes','depreciation','k 1','k1','schedule k','cost segregation','write off','shelter','deduction'],
-      a: 'You receive a Schedule K-1 reflecting your share of depreciation, including accelerated depreciation from a cost segregation study. For many investors that paper loss offsets most of the cash received in the early years. We target K-1 delivery by April 15.',
-      cta: 'We are not tax advisors — take it to your CPA. Seth is happy to talk through the mechanics first.' },
+      a: 'You get a K-1 carrying your share of depreciation, accelerated through a cost segregation study.<br><br>For most investors the paper loss offsets the majority of cash received in the early years. We target K-1 delivery by April 15.',
+      cta: 'Your CPA should confirm the specifics \u2014 we are not tax advisors. Seth can cover the mechanics first.' },
 
     { id: 'ira', k: ['ira','401k','retirement','self directed','sdira','solo'],
-      a: 'Yes — self-directed IRA and solo 401(k) capital is accepted through any major custodian. One caveat worth knowing: leveraged real estate inside an IRA can generate UBTI, which changes the maths for some investors.',
-      cta: 'Worth raising with your tax advisor, and with Seth on a call.' },
+      a: 'Yes \u2014 self-directed IRA or solo 401(k), through any major custodian.<br><br>One thing to know: leveraged real estate inside an IRA can generate UBTI, which changes the arithmetic. Worth a word with your tax advisor about which pocket to use.',
+      cta: 'Seth can flag what to ask them.' },
 
     { id: 'risk', k: ['risk','lose','downside','wrong','danger','safe','guarantee','worst case'],
-      a: 'You can lose money, including all of it. Real estate is leveraged, illiquid, and exposed to interest rates, insurance costs, local employment and our own judgement — and we are a first-time sponsor, which is a genuine risk you should price.',
-      cta: 'We would rather you heard the honest version now than in year three. Seth will go through it properly on a call.' },
+      a: 'You can lose the entire investment. It is leveraged, illiquid, and exposed to rates, insurance, local employment and our judgement \u2014 and we are a first-time sponsor, which is a real risk to price rather than wave through.<br><br>What we control: conservative debt, twelve months of reserves at closing, markets we know, and Seth\u2019s own capital in every deal.',
+      cta: 'Better you hear the honest version now than in year three.' },
 
     { id: 'deal', k: ['current deal','offering','offerings','current offering','available','available now','open offering','invest today','under contract','any deals','right now'],
-      a: 'No offering is open today. Seth is actively sourcing in the three target markets and is not going to buy something just to have something to sell.',
-      cta: 'The people who already know us see the first deal first — an intro call is how you get on that list.' },
+      a: 'Nothing open today. Seth is sourcing in the three target markets and will not buy something simply to have something to raise on.<br><br>The people who already know us see the first deal first.',
+      cta: 'An intro call is how you get on that list.' },
 
     { id: 'debt', k: ['debt','leverage','loan','ltv','financing','mortgage','borrow'],
-      a: 'Fixed-rate debt at no more than <strong>75% of the purchase price</strong>, with a term extending beyond the planned hold, plus twelve months of operating reserves funded at closing. Both exist so we are never a forced seller.',
-      cta: 'Seth can explain how that changes the risk profile.' },
+      a: 'Fixed-rate, no more than <strong>75% LTV</strong>, with a term that outlasts the business plan, plus twelve months of operating reserves funded at closing.<br><br>Both exist so we are never a forced seller in a bad window.',
+      cta: 'Seth can explain what that does to the downside.' },
 
     { id: 'property', k: ['kind of property','type of property','property type','units','buildings','apartment','asset','class b','vintage'],
-      a: 'Existing apartment communities of 150 to 350 units, built between 1980 and 2006, occupied by working households — not new luxury product. That size supports a full-time on-site team while staying below where institutional buyers compete.',
-      cta: 'The Strategy page has the full buy box. Seth can talk through a live example.' },
+      a: '150 to 350 units, built 1980 to 2006, occupied by working households \u2014 not new luxury product.<br><br>Large enough to carry a full-time on-site team, small enough that institutional buyers are not bidding against us.',
+      cta: 'The Strategy page has the full buy box if you want the detail.' },
 
     { id: 'start', k: ['how do i start','next step','next steps','get started','getting started','sign up','join','process','begin','first step'],
-      a: 'It starts with a fifteen-minute call — no deck, no pressure. Seth asks about your goals and tax position, you ask whatever you want, and if it is a poor fit he will say so on that call rather than three emails later.',
-      cta: 'Shall I take you to the scheduling page?' },
+      a: 'A fifteen-minute call. No deck, no pressure.<br><br>Seth asks what you are solving for and where you sit on tax; you ask whatever you want. If it is a poor fit he will say so on that call rather than three emails later.',
+      cta: 'Shall I point you at the scheduling page?' },
 
-    { id: 'contact', k: ['contact','email','phone','call','reach','speak','talk','schedule','book'],
-      a: 'Easiest is to book the intro call. You can also reach Seth at <a href="mailto:sbphillips88@gmail.com">sbphillips88@gmail.com</a> or <a href="tel:+18287133597">(828) 713-3597</a>.',
-      cta: 'Fifteen minutes, straight to Seth.' }
+    { id: 'contact', k: ['contact','email','call','reach','speak','talk','schedule','book'],
+      a: 'The intro call is the fastest route. Otherwise Seth reads his own email: <a href="mailto:seth.phillips@mallardlegacypartners.com">seth.phillips@mallardlegacypartners.com</a>.',
+      cta: 'Fifteen minutes, straight to him.' }
   ];
 
-  var GREETING = 'Hi — I can answer questions about how Mallard invests, the terms, or what happens on a first call. What would you like to know?';
-  var CHIPS = ['What are the target returns?', 'What is the minimum?', 'Do you have a track record?', 'How do I get started?'];
+  var GREETING = 'Happy to answer anything \u2014 how we invest, the terms, the risks, or what a first call actually looks like. What would be useful?';
+  var CHIPS = ['What returns do you target?', 'What is the minimum?', 'What is your track record?', 'What are the risks?'];
 
   var FALLBACK = {
-    a: 'I would rather not guess at that one. Seth answers his own email and takes every intro call himself, so the fastest accurate answer is straight from him.',
+    a: 'I would rather give you nothing than something approximate on that one. Seth takes every call himself, so the accurate answer is a short conversation away.',
     cta: 'Fifteen minutes, no obligation.'
   };
 
