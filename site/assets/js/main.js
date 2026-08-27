@@ -39,6 +39,10 @@
       });
       // Property as well as attribute: Chrome checks the property when
       // deciding whether an autoplay is permitted.
+      // Poster is attached here, not in the markup: as an attribute it is
+      // fetched even when no source is ever added, so phones paid for two
+      // images they never display.
+      if (video.dataset.poster) video.poster = video.dataset.poster;
       video.muted = true;
       video.defaultMuted = true;
       var reveal = function () { video.classList.add('is-playing'); };

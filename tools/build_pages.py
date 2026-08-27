@@ -79,7 +79,7 @@ def nav(active):
 
 <div class="drawer" id="drawer" data-drawer data-open="false">
   %s
-  <a class="btn btn--primary btn--lg" href="contact.html">Schedule a call <svg width="18" height="18"><use href="#i-arrow"/></svg></a>
+  <a class="btn btn--primary btn--lg" href="contact.html">Schedule a call <svg viewBox="0 0 24 24" width="18" height="18"><use href="#i-arrow"/></svg></a>
 </div>""" % (links, drawer)
 
 
@@ -103,8 +103,7 @@ FOOTER = """<footer class="footer">
       <div>
         <h4>Contact</h4>
         <ul>
-          <li><a href="mailto:sbphillips88@gmail.com">sbphillips88@gmail.com</a></li>
-          <li><a href="tel:+18287133597">(828) 713-3597</a></li>
+          <li><a href="mailto:seth.phillips@mallardlegacypartners.com">seth.phillips@mallardlegacypartners.com</a></li>
           <li><a href="https://www.linkedin.com/in/seth-phillips-a142b9413" rel="noopener">LinkedIn</a></li>
         </ul>
       </div>
@@ -144,7 +143,7 @@ def cta_band(title, sub, primary=("contact.html", "Schedule an intro call"),
     <h2 class="display">%s</h2>
     <p class="lede center-block mt-6" style="text-align:center">%s</p>
     <div class="finalCta__cta">
-      <a class="btn btn--primary btn--lg" href="%s">%s <svg width="18" height="18" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <a class="btn btn--primary btn--lg" href="%s">%s <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><use href="#i-arrow"/></svg></a>
       <a class="btn btn--secondary btn--lg" href="%s">%s</a>
     </div>
   </div>
@@ -424,7 +423,7 @@ def tile(img, tag, name, city, units, year, alt):
         <div class="tile__body">
           <div><h3>%s</h3>
             <p class="tile__meta"><span>%s</span><span>%s units</span><span>%s</span></p></div>
-          <span class="tile__arrow"><svg width="18" height="18" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+          <span class="tile__arrow"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><use href="#i-arrow"/></svg></span>
         </div>
       </a>""" % (tag, img, alt, name, city, units, year)
 
@@ -464,7 +463,7 @@ portfolio_body = page_head(
 
     <div class="reveal mt-7">
       <a class="btn btn--primary" href="contact.html">Get told when we find one
-        <svg width="18" height="18" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><use href="#i-arrow"/></svg></a>
     </div>
   </div>
 </section>
@@ -512,7 +511,7 @@ fund_body = page_head(
         <p class="lede mt-6">Every line below appears in the offering documents. Nothing here is a summary
           that becomes less favourable once you read the PPM.</p>
         <a class="btn btn--primary mt-7" href="contact.html">Request the offering documents
-          <svg width="18" height="18" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><use href="#i-arrow"/></svg></a>
       </div>
       <div class="reveal" data-delay="1">
         <div class="faq" data-faq>
@@ -561,7 +560,7 @@ fund_body = page_head(
     </div>
     <div class="text-center reveal" data-delay="1">
       <a class="btn btn--secondary btn--lg" href="contact.html">
-        <svg width="18" height="18" aria-hidden="true"><use href="#i-lock"/></svg> Sign in to the investor portal</a>
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><use href="#i-lock"/></svg> Sign in to the investor portal</a>
       <p class="formNote mt-6">Portal link goes live once your investor management platform
         (Juniper Square, AppFolio Investment Management or similar) is connected.</p>
     </div>
@@ -613,7 +612,7 @@ about_body = page_head(
         <p class="bio__sig">Seth Phillips</p>
         <p class="mt-6">
           <a class="link" href="https://www.linkedin.com/in/seth-phillips-a142b9413" rel="noopener">
-            Seth on LinkedIn <svg width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            Seth on LinkedIn <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></a>
         </p>
       </div>
     </div>
@@ -654,7 +653,7 @@ def article_card(cat, title, blurb, mins, delay):
         <h3 class="h3" style="margin-top:var(--s-3)">%s</h3>
         <p>%s</p>
         <span class="link" style="margin-top:auto;padding-top:var(--s-4)">Read &middot; %s min
-          <svg width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></span>
       </a>""" % (delay, cat, title, blurb, mins)
 
 
@@ -675,13 +674,13 @@ insights_body = page_head(
           money — including the four that most sponsors cannot answer, and the two we find
           uncomfortable.</p>
         <div class="bio__creds">
-          <p class="bio__cred"><svg width="18" height="18" aria-hidden="true"><use href="#i-doc"/></svg>
+          <p class="bio__cred"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><use href="#i-doc"/></svg>
             How to read a waterfall and spot a promote that triggers too early.</p>
-          <p class="bio__cred"><svg width="18" height="18" aria-hidden="true"><use href="#i-shield"/></svg>
+          <p class="bio__cred"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><use href="#i-shield"/></svg>
             The three debt terms that cause most syndication failures.</p>
-          <p class="bio__cred"><svg width="18" height="18" aria-hidden="true"><use href="#i-receipt"/></svg>
+          <p class="bio__cred"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><use href="#i-receipt"/></svg>
             What a cost segregation study actually does to your tax return.</p>
-          <p class="bio__cred"><svg width="18" height="18" aria-hidden="true"><use href="#i-users"/></svg>
+          <p class="bio__cred"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><use href="#i-users"/></svg>
             Reference questions to ask a sponsor's existing investors.</p>
         </div>
       </div>
@@ -693,17 +692,17 @@ insights_body = page_head(
             <label for="dname">Full name <span class="req" aria-hidden="true">*</span></label>
             <input id="dname" name="name" type="text" autocomplete="name" required
                    data-msg-required="Enter your full name.">
-            <p class="field__error"><svg width="14" height="14"><use href="#i-minus"/></svg><span></span></p>
+            <p class="field__error"><svg viewBox="0 0 24 24" width="14" height="14"><use href="#i-minus"/></svg><span></span></p>
           </div>
           <div class="field">
             <label for="demail">Email <span class="req" aria-hidden="true">*</span></label>
             <input id="demail" name="email" type="email" autocomplete="email" required
                    data-msg-required="We need somewhere to send it."
                    data-msg-invalid="That address is missing an @ or a domain.">
-            <p class="field__error"><svg width="14" height="14"><use href="#i-minus"/></svg><span></span></p>
+            <p class="field__error"><svg viewBox="0 0 24 24" width="14" height="14"><use href="#i-minus"/></svg><span></span></p>
           </div>
           <button class="btn btn--primary btn--full" type="submit">Download the checklist
-            <svg width="18" height="18" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><use href="#i-arrow"/></svg></button>
           <p class="form-status" tabindex="-1" role="status" aria-live="polite"></p>
           <p class="formNote">One email with the file. No sequence, and you can unsubscribe from
             the footer of that single message.</p>
@@ -867,16 +866,16 @@ contact_body = page_head(
       <div class="reveal">
         <h2 class="h2">What the call<br>actually <em>covers.</em></h2>
         <div class="bio__creds mt-6" style="border-top:0;padding-top:0">
-          <p class="bio__cred"><svg width="18" height="18" aria-hidden="true"><use href="#i-users"/></svg>
+          <p class="bio__cred"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><use href="#i-users"/></svg>
             <span><strong style="color:var(--text)">Your situation.</strong> Income, tax position,
             timeline, and what this capital is actually for.</span></p>
-          <p class="bio__cred"><svg width="18" height="18" aria-hidden="true"><use href="#i-building"/></svg>
+          <p class="bio__cred"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><use href="#i-building"/></svg>
             <span><strong style="color:var(--text)">How we invest.</strong> The buy box, the debt
             philosophy, and where our last four deals landed against plan.</span></p>
-          <p class="bio__cred"><svg width="18" height="18" aria-hidden="true"><use href="#i-receipt"/></svg>
+          <p class="bio__cred"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><use href="#i-receipt"/></svg>
             <span><strong style="color:var(--text)">The mechanics.</strong> Minimums, distributions,
             K-1 timing, and how self-directed IRA capital would work for you.</span></p>
-          <p class="bio__cred"><svg width="18" height="18" aria-hidden="true"><use href="#i-shield"/></svg>
+          <p class="bio__cred"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><use href="#i-shield"/></svg>
             <span><strong style="color:var(--text)">Whether to stop here.</strong> If you need
             liquidity inside five years, we will tell you to look elsewhere.</span></p>
         </div>
@@ -884,13 +883,8 @@ contact_body = page_head(
         <hr class="divider">
 
         <div class="stack-sm">
-          <p><a class="link" href="mailto:sbphillips88@gmail.com">sbphillips88@gmail.com
-            <svg width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></a></p>
-          <p style="margin-top:var(--s-4)"><a class="link" href="tel:+18287133597">(828) 713-3597
-            <svg width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></a></p>
-          <p class="body-muted" style="margin-top:var(--s-4);font-size:14px">
-            <svg width="16" height="16" style="display:inline;vertical-align:-3px;color:var(--gold-600)" aria-hidden="true"><use href="#i-pin"/></svg>
-            Asheville, North Carolina &middot; Calls taken 8am&ndash;6pm Eastern</p>
+          <p><a class="link" href="mailto:seth.phillips@mallardlegacypartners.com">seth.phillips@mallardlegacypartners.com
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></a></p>
         </div>
       </div>
 
@@ -905,20 +899,20 @@ contact_body = page_head(
             <label for="cname">Full name <span class="req" aria-hidden="true">*</span></label>
             <input id="cname" name="name" type="text" autocomplete="name" required
                    data-msg-required="Enter your full name.">
-            <p class="field__error"><svg width="14" height="14"><use href="#i-minus"/></svg><span></span></p>
+            <p class="field__error"><svg viewBox="0 0 24 24" width="14" height="14"><use href="#i-minus"/></svg><span></span></p>
           </div>
           <div class="field">
             <label for="cemail">Email <span class="req" aria-hidden="true">*</span></label>
             <input id="cemail" name="email" type="email" autocomplete="email" required
                    data-msg-required="We need an email address to reply to."
                    data-msg-invalid="That address is missing an @ or a domain.">
-            <p class="field__error"><svg width="14" height="14"><use href="#i-minus"/></svg><span></span></p>
+            <p class="field__error"><svg viewBox="0 0 24 24" width="14" height="14"><use href="#i-minus"/></svg><span></span></p>
           </div>
           <div class="field">
             <label for="cphone">Phone <span class="req" aria-hidden="true">*</span></label>
             <input id="cphone" name="phone" type="tel" autocomplete="tel" required
                    data-msg-required="A number to reach you on.">
-            <p class="field__error"><svg width="14" height="14"><use href="#i-minus"/></svg><span></span></p>
+            <p class="field__error"><svg viewBox="0 0 24 24" width="14" height="14"><use href="#i-minus"/></svg><span></span></p>
           </div>
           <div class="field">
             <label for="cstatus">Accredited investor status <span class="req" aria-hidden="true">*</span></label>
@@ -931,7 +925,7 @@ contact_body = page_head(
               <option>Not sure — please explain it to me</option>
             </select>
             <p class="field__help">Required under SEC Rule 506(c). Nothing is verified at this stage.</p>
-            <p class="field__error"><svg width="14" height="14"><use href="#i-minus"/></svg><span></span></p>
+            <p class="field__error"><svg viewBox="0 0 24 24" width="14" height="14"><use href="#i-minus"/></svg><span></span></p>
           </div>
           <div class="field">
             <label for="camount">Capital you are considering <span class="req" aria-hidden="true">*</span></label>
@@ -943,7 +937,7 @@ contact_body = page_head(
               <option>$1,000,000+</option>
               <option>Exploring — no figure yet</option>
             </select>
-            <p class="field__error"><svg width="14" height="14"><use href="#i-minus"/></svg><span></span></p>
+            <p class="field__error"><svg viewBox="0 0 24 24" width="14" height="14"><use href="#i-minus"/></svg><span></span></p>
           </div>
           <div class="field">
             <label for="cnotes">Anything we should know first?
@@ -953,7 +947,7 @@ contact_body = page_head(
           </div>
 
           <button class="btn btn--primary btn--lg btn--full" type="submit">Request the call
-            <svg width="18" height="18" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><use href="#i-arrow"/></svg></button>
           <p class="form-status" tabindex="-1" role="status" aria-live="polite"></p>
           <p class="formNote">Submitting this form does not create an investor relationship and is
             not an offer to sell securities. See our <a href="privacy.html">privacy policy</a>.</p>
@@ -988,7 +982,7 @@ thanks_body = page_head(
     </div>
     <div class="text-center mt-7 reveal">
       <a class="btn btn--secondary" href="strategy.html">Read the strategy while you wait
-        <svg width="18" height="18" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><use href="#i-arrow"/></svg></a>
     </div>
   </div>
 </section>
@@ -1052,7 +1046,7 @@ disclosures_body = page_head(
 
       <h2>Contact</h2>
       <p>Questions about anything on this page may be sent to
-        <a href="mailto:sbphillips88@gmail.com">sbphillips88@gmail.com</a>.</p>
+        <a href="mailto:seth.phillips@mallardlegacypartners.com">seth.phillips@mallardlegacypartners.com</a>.</p>
     </div>
   </div>
 </section>
@@ -1085,7 +1079,7 @@ privacy_body = page_head(
       <p>Enquiry records are kept for two years unless you become an investor, in which case
         recordkeeping obligations under securities and tax law apply. Ask us to delete your
         information at any time by emailing
-        <a href="mailto:sbphillips88@gmail.com">sbphillips88@gmail.com</a> and we will, subject
+        <a href="mailto:seth.phillips@mallardlegacypartners.com">seth.phillips@mallardlegacypartners.com</a> and we will, subject
         to those obligations.</p>
 
       <h2>Cookies</h2>
@@ -1101,7 +1095,7 @@ privacy_body = page_head(
 
       <h2>Contact</h2>
       <p>Mallard Legacy Partners LLC &middot; Asheville, North Carolina &middot;
-        <a href="mailto:sbphillips88@gmail.com">sbphillips88@gmail.com</a></p>
+        <a href="mailto:seth.phillips@mallardlegacypartners.com">seth.phillips@mallardlegacypartners.com</a></p>
     </div>
   </div>
 </section>

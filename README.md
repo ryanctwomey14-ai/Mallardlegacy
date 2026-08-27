@@ -314,6 +314,28 @@ palette. Only needed if you change colours or want different building compositio
 
 ---
 
+## Mobile
+
+Most visitors will be on a phone, so mobile is treated as the primary target rather than a
+fallback. Audited across iPhone SE (320), iPhone X/14 (375/390), Plus (414), Android (360)
+and both landscape orientations.
+
+**Content parity is exact** — nothing is hidden on mobile that a desktop visitor sees.
+
+Four things are deliberate and easy to undo by accident:
+
+- **Video posters are attached in JS, not markup.** A `poster` attribute is fetched even when
+  no `<source>` is ever added, so phones were paying 187KB for two images they never display.
+  Moving them to `data-poster` cut the mobile payload from **368KB to 165KB**.
+- **Landscape gets its own hero.** Stacked, the hero ran 887px inside a 390px viewport and
+  pushed the call-to-action two screens down. Landscape goes side-by-side with tighter
+  padding; a second rule handles very short screens.
+- **Icon SVGs must carry `viewBox="0 0 24 24"`.** The sprite is drawn on a 24-unit grid, so an
+  `<svg width="16">` without a viewBox renders the glyph 1:1 and shears off everything past
+  16px. Every check mark and arrow on the site was clipped until this was fixed.
+- **`mailto:` and `tel:` links wrap with `overflow-wrap:anywhere`.** The contact address is 39
+  unbreakable characters and overflowed a 320px viewport on its own.
+
 ## Accessibility
 
 Verified in-browser across all eleven pages:
