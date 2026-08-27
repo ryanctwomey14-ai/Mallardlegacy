@@ -58,7 +58,7 @@ def nav(active):
         for href, label in NAV_ITEMS)
     drawer = "\n  ".join(
         '<a href="{0}">{1}</a>'.format(href, label)
-        for href, label in NAV_ITEMS if href != "index.html")
+        for href, label in NAV_ITEMS)
     return """<header class="nav nav--onDark" data-nav>
   <div class="container nav__inner">
     <a class="nav__brand" href="index.html" aria-label="Mallard Legacy Partners — home">
@@ -290,6 +290,14 @@ strategy_body = page_head(
         <input class="calc__range" type="range" min="100000" max="1000000" step="25000"
                value="100000" data-calc-range aria-label="Amount invested, in dollars">
         <div class="calc__scale" aria-hidden="true"><span>$100k</span><span>$1M</span></div>
+
+        <div class="calc__hold">
+          <label class="calc__label" for="calcHold">Hold period
+            <span class="calc__holdValue" data-calc="holdLabel">7 years</span></label>
+          <input class="calc__range" id="calcHold" type="range" min="5" max="7" step="1"
+                 value="7" data-calc-hold aria-label="Hold period in years">
+          <div class="calc__scale" aria-hidden="true"><span>5 yrs</span><span>6 yrs</span><span>7 yrs</span></div>
+        </div>
       </div>
 
       <div class="calc__results" role="status" aria-live="polite">
@@ -344,11 +352,11 @@ strategy_body = page_head(
       </figure>
 
       <p class="calc__foot">
-        Over a planned hold of five to seven years, against a target investor IRR of
-        15&ndash;17%. The split assumes quarterly distributions averaging 5% of invested
-        capital annually in the lower case and 7% in the upper case, with the balance
-        realised when the property is sold. The actual split depends on the individual
-        property and its business plan.
+        Against a target investor IRR of 15&ndash;17%. The split assumes quarterly
+        distributions averaging 5% of invested capital annually in the lower case and 7%
+        in the upper case, with the balance realised when the property is sold. A shorter
+        hold means less accumulated cash flow and more of the return arriving at sale.
+        The actual split depends on the individual property and its business plan.
       </p>
     </div>
 
