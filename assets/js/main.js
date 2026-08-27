@@ -27,16 +27,19 @@
      all. A poster or still sits underneath throughout, so every failure path
      -- no JS, blocked autoplay, 404, unsupported codec -- lands on an image. */
   var bgVideos = document.querySelectorAll('[data-video-mp4]');
-  if (bgVideos.length && !reduceMotion && window.matchMedia('(min-width: 900px)').matches) {
+  // Phones get the video too, but a 960x540 encode rather than the full file:
+  // atmosphere is not worth 4.6MB of someone's cellular data.
+  var narrow = window.matchMedia('(max-width: 899px)').matches;
+  if (bgVideos.length && !reduceMotion) {
     bgVideos.forEach(function (video) {
-      [['webm', 'video/webm'], ['mp4', 'video/mp4']].forEach(function (pair) {
-        var src = video.getAttribute('data-video-' + pair[0]);
-        if (!src) return;
+      var src = (narrow && video.getAttribute('data-video-mp4-mobile')) ||
+                video.getAttribute('data-video-mp4');
+      if (src) {
         var s = document.createElement('source');
         s.src = src;
-        s.type = pair[1];
+        s.type = 'video/mp4';
         video.appendChild(s);
-      });
+      }
       // Property as well as attribute: Chrome checks the property when
       // deciding whether an autoplay is permitted.
       // Poster is attached here, not in the markup: as an attribute it is
@@ -247,9 +250,13 @@
   var calcInput = document.querySelector('[data-calc-input]');
   var calcRange = document.querySelector('[data-calc-range]');
   var calcChart = document.querySelector('[data-calc-chart]');
+  var calcHold = document.querySelector('[data-calc-hold]');
   if (calcInput && calcRange) {
     var MIN = 100000, MAX = 1000000;
-    var LOW = 1.8, HIGH = 2.2, YEARS = 7;
+    var LOW = 1.8, HIGH = 2.2;
+    // Hold is now chosen by the visitor; the multiples are 'over the hold',
+    // so a shorter hold compounds harder and accrues less cash flow.
+    var YEARS = calcHold ? parseInt(calcHold.value, 10) : 7;
     // Cash yield assumptions behind the split. Stated in the footnote so the
     // breakdown is never presented as a property-specific figure.
     var CASH_LOW = 0.05, CASH_HIGH = 0.07;
@@ -292,8 +299,8 @@
       var lowAt = function (t) { return p * Math.pow(LOW, t / YEARS); };
       var highAt = function (t) { return p * Math.pow(HIGH, t / YEARS); };
 
-      var pts = [], i;
-      for (i = 0; i <= 56; i++) pts.push(i / 8);
+      var pts = [], i, STEPS = YEARS * 8;
+      for (i = 0; i <= STEPS; i++) pts.push(i / 8);
 
       var lowPath = pts.map(function (t, n) {
         return (n ? 'L' : 'M') + x(t).toFixed(1) + ' ' + y(lowAt(t)).toFixed(1);
@@ -325,8 +332,7 @@
         '<path class="calc__line" d="' + highPath + '"/>' +
         '<line class="calc__base" x1="' + PAD_L + '" y1="' + y(bottom).toFixed(1) +
           '" x2="' + (W - PAD_R) + '" y2="' + y(bottom).toFixed(1) + '"/>' +
-        '<line class="calc__exit" x1="' + x(5).toFixed(1) + '" y1="' + PAD_T +
-          '" x2="' + x(5).toFixed(1) + '" y2="' + (H - PAD_B) + '"/>' +
+
         '<circle class="calc__dot" cx="' + x(YEARS).toFixed(1) + '" cy="' +
           y(highAt(YEARS)).toFixed(1) + '" r="' + dotR.toFixed(1) + '"/>' +
         '<circle class="calc__dot" cx="' + x(YEARS).toFixed(1) + '" cy="' +
@@ -337,7 +343,16 @@
       if (out[key]) out[key].textContent = money(value);
     };
 
+    var axis = document.querySelector('.calc__axis');
+
     var render = function (amount) {
+      YEARS = calcHold ? parseInt(calcHold.value, 10) : 7;
+      if (out.holdLabel) out.holdLabel.textContent = YEARS + ' years';
+      if (axis) {
+        axis.innerHTML = ['Today', 'Yr ' + Math.round(YEARS / 3),
+          'Yr ' + Math.round(YEARS * 2 / 3), 'Yr ' + YEARS]
+          .map(function (t) { return '<span>' + t + '</span>'; }).join('');
+      }
       // Cash comes from distributions across the hold; equity is whatever the
       // multiple leaves over once capital and those distributions are removed.
       var lowCash = amount * CASH_LOW * YEARS;
@@ -372,6 +387,10 @@
       calcInput.value = v.toLocaleString('en-US');
       render(v);
     });
+    if (calcHold) {
+      calcHold.addEventListener('input', function () { render(clean(calcInput.value)); });
+    }
+
     render(clean(calcInput.value));
 
     // Label sizing depends on rendered width, so recompute on resize.

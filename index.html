@@ -20,7 +20,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <script>document.documentElement.classList.add('js');</script>
-<link rel="stylesheet" href="assets/css/main.css?v=c9207de8">
+<link rel="stylesheet" href="assets/css/main.css?v=e7bba80f">
 
 <script type="application/ld+json">
 {
@@ -113,6 +113,7 @@
 </header>
 
 <div class="drawer" id="drawer" data-drawer data-open="false">
+  <a href="index.html">Home</a>
   <a href="strategy.html">Strategy</a>
   <a href="about.html">About</a>
   <a href="faq.html">FAQ</a>
@@ -130,12 +131,13 @@
 <section class="hero">
   <div class="hero__bg">
     <img class="hero__still" src="assets/img/hero-wetland.svg" alt="" width="1600" height="1000" fetchpriority="high">
-    <!-- Sources are injected by JS only on wide viewports with motion allowed,
-         so phones never download 1.6MB they will not see. The still stays
+    <!-- Sources are injected by JS, which picks a 960x540 encode on phones so
+         the atmosphere costs 430KB rather than 1.8MB. The still stays
          underneath: if autoplay is blocked or the file fails, nothing breaks. -->
     <video class="hero__video" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"
            data-poster="assets/img/hero-poster.jpg"
-           data-video-mp4="assets/video/mallard-hero.mp4"></video>
+           data-video-mp4="assets/video/mallard-hero.mp4"
+           data-video-mp4-mobile="assets/video/mallard-hero-mobile.mp4"></video>
   </div>
   <div class="hero__vignette"></div>
 
@@ -294,7 +296,8 @@
   <div class="section__media">
     <video class="section__video" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"
            data-poster="assets/img/investment-case-poster.jpg"
-           data-video-mp4="assets/video/investment-case.mp4"></video>
+           data-video-mp4="assets/video/investment-case.mp4"
+           data-video-mp4-mobile="assets/video/investment-case-mobile.mp4"></video>
   </div>
   <div class="section__scrim"></div>
   <div class="container">
@@ -531,52 +534,52 @@
         <tbody>
           <tr>
             <th scope="row">Direct ownership of the asset</th>
-            <td class="col-us"><span class="cell"><svg viewBox="0 0 24 24" width="16" height="16"><use href="#i-check"/></svg>Yes &mdash; you hold equity in the LLC that owns the building</span></td>
-            <td class="col-alt"><span class="cell"><svg viewBox="0 0 24 24" width="16" height="16"><use href="#i-minus"/></svg>No &mdash; you own a share of a company</span></td>
-            <td class="col-alt"><span class="cell"><svg viewBox="0 0 24 24" width="16" height="16"><use href="#i-check"/></svg>Yes</span></td>
-            <td class="col-alt"><span class="cell"><svg viewBox="0 0 24 24" width="16" height="16"><use href="#i-minus"/></svg>No</span></td>
+            <td class="col-us" data-col="Mallard Legacy Partners"><span class="cell"><svg viewBox="0 0 24 24" width="16" height="16"><use href="#i-check"/></svg>Yes &mdash; you hold equity in the LLC that owns the building</span></td>
+            <td class="col-alt" data-col="Public REIT"><span class="cell"><svg viewBox="0 0 24 24" width="16" height="16"><use href="#i-minus"/></svg>No &mdash; you own a share of a company</span></td>
+            <td class="col-alt" data-col="Your own rental"><span class="cell"><svg viewBox="0 0 24 24" width="16" height="16"><use href="#i-check"/></svg>Yes</span></td>
+            <td class="col-alt" data-col="Index fund"><span class="cell"><svg viewBox="0 0 24 24" width="16" height="16"><use href="#i-minus"/></svg>No</span></td>
           </tr>
           <tr>
             <th scope="row">Depreciation passed to you</th>
-            <td class="col-us"><span class="cell"><svg viewBox="0 0 24 24" width="16" height="16"><use href="#i-check"/></svg>Accelerated via cost segregation, on your K-1</span></td>
-            <td class="col-alt"><span class="cell"><svg viewBox="0 0 24 24" width="16" height="16"><use href="#i-minus"/></svg>Retained at the entity level</span></td>
-            <td class="col-alt"><span class="cell"><svg viewBox="0 0 24 24" width="16" height="16"><use href="#i-check"/></svg>Straight-line, usually unaccelerated</span></td>
-            <td class="col-alt"><span class="cell"><svg viewBox="0 0 24 24" width="16" height="16"><use href="#i-minus"/></svg>None</span></td>
+            <td class="col-us" data-col="Mallard Legacy Partners"><span class="cell"><svg viewBox="0 0 24 24" width="16" height="16"><use href="#i-check"/></svg>Accelerated via cost segregation, on your K-1</span></td>
+            <td class="col-alt" data-col="Public REIT"><span class="cell"><svg viewBox="0 0 24 24" width="16" height="16"><use href="#i-minus"/></svg>Retained at the entity level</span></td>
+            <td class="col-alt" data-col="Your own rental"><span class="cell"><svg viewBox="0 0 24 24" width="16" height="16"><use href="#i-check"/></svg>Straight-line, usually unaccelerated</span></td>
+            <td class="col-alt" data-col="Index fund"><span class="cell"><svg viewBox="0 0 24 24" width="16" height="16"><use href="#i-minus"/></svg>None</span></td>
           </tr>
           <tr>
             <th scope="row">Correlation to public equities</th>
-            <td class="col-us"><span class="cell"><svg viewBox="0 0 24 24" width="16" height="16"><use href="#i-check"/></svg>Low &mdash; valued on property income</span></td>
-            <td class="col-alt"><span class="cell"><svg viewBox="0 0 24 24" width="16" height="16"><use href="#i-minus"/></svg>High &mdash; trades with the market</span></td>
-            <td class="col-alt"><span class="cell"><svg viewBox="0 0 24 24" width="16" height="16"><use href="#i-check"/></svg>Low</span></td>
-            <td class="col-alt"><span class="cell"><svg viewBox="0 0 24 24" width="16" height="16"><use href="#i-minus"/></svg>It is the market</span></td>
+            <td class="col-us" data-col="Mallard Legacy Partners"><span class="cell"><svg viewBox="0 0 24 24" width="16" height="16"><use href="#i-check"/></svg>Low &mdash; valued on property income</span></td>
+            <td class="col-alt" data-col="Public REIT"><span class="cell"><svg viewBox="0 0 24 24" width="16" height="16"><use href="#i-minus"/></svg>High &mdash; trades with the market</span></td>
+            <td class="col-alt" data-col="Your own rental"><span class="cell"><svg viewBox="0 0 24 24" width="16" height="16"><use href="#i-check"/></svg>Low</span></td>
+            <td class="col-alt" data-col="Index fund"><span class="cell"><svg viewBox="0 0 24 24" width="16" height="16"><use href="#i-minus"/></svg>It is the market</span></td>
           </tr>
           <tr>
             <th scope="row">Your time per month</th>
-            <td class="col-us"><span class="cell"><svg viewBox="0 0 24 24" width="16" height="16"><use href="#i-check"/></svg>Minutes &mdash; read the quarterly report</span></td>
-            <td class="col-alt"><span class="cell"><svg viewBox="0 0 24 24" width="16" height="16"><use href="#i-check"/></svg>None</span></td>
-            <td class="col-alt"><span class="cell"><svg viewBox="0 0 24 24" width="16" height="16"><use href="#i-minus"/></svg>Five to twenty hours</span></td>
-            <td class="col-alt"><span class="cell"><svg viewBox="0 0 24 24" width="16" height="16"><use href="#i-check"/></svg>None</span></td>
+            <td class="col-us" data-col="Mallard Legacy Partners"><span class="cell"><svg viewBox="0 0 24 24" width="16" height="16"><use href="#i-check"/></svg>Minutes &mdash; read the quarterly report</span></td>
+            <td class="col-alt" data-col="Public REIT"><span class="cell"><svg viewBox="0 0 24 24" width="16" height="16"><use href="#i-check"/></svg>None</span></td>
+            <td class="col-alt" data-col="Your own rental"><span class="cell"><svg viewBox="0 0 24 24" width="16" height="16"><use href="#i-minus"/></svg>Five to twenty hours</span></td>
+            <td class="col-alt" data-col="Index fund"><span class="cell"><svg viewBox="0 0 24 24" width="16" height="16"><use href="#i-check"/></svg>None</span></td>
           </tr>
           <tr>
             <th scope="row">Liquidity</th>
-            <td class="col-us"><span class="cell"><svg viewBox="0 0 24 24" width="16" height="16"><use href="#i-minus"/></svg>None. Capital is committed for five to seven years</span></td>
-            <td class="col-alt"><span class="cell"><svg viewBox="0 0 24 24" width="16" height="16"><use href="#i-check"/></svg>Daily</span></td>
-            <td class="col-alt"><span class="cell"><svg viewBox="0 0 24 24" width="16" height="16"><use href="#i-minus"/></svg>Months to sell</span></td>
-            <td class="col-alt"><span class="cell"><svg viewBox="0 0 24 24" width="16" height="16"><use href="#i-check"/></svg>Daily</span></td>
+            <td class="col-us" data-col="Mallard Legacy Partners"><span class="cell"><svg viewBox="0 0 24 24" width="16" height="16"><use href="#i-minus"/></svg>None. Capital is committed for five to seven years</span></td>
+            <td class="col-alt" data-col="Public REIT"><span class="cell"><svg viewBox="0 0 24 24" width="16" height="16"><use href="#i-check"/></svg>Daily</span></td>
+            <td class="col-alt" data-col="Your own rental"><span class="cell"><svg viewBox="0 0 24 24" width="16" height="16"><use href="#i-minus"/></svg>Months to sell</span></td>
+            <td class="col-alt" data-col="Index fund"><span class="cell"><svg viewBox="0 0 24 24" width="16" height="16"><use href="#i-check"/></svg>Daily</span></td>
           </tr>
           <tr>
             <th scope="row">Sponsor capital at risk</th>
-            <td class="col-us"><span class="cell"><svg viewBox="0 0 24 24" width="16" height="16"><use href="#i-check"/></svg>Seth invests personally in every offering</span></td>
-            <td class="col-alt"><span class="cell"><svg viewBox="0 0 24 24" width="16" height="16"><use href="#i-minus"/></svg>Management compensated in stock</span></td>
-            <td class="col-alt"><span class="cell"><svg viewBox="0 0 24 24" width="16" height="16"><use href="#i-check"/></svg>All of it is yours</span></td>
-            <td class="col-alt"><span class="cell"><svg viewBox="0 0 24 24" width="16" height="16"><use href="#i-minus"/></svg>Not applicable</span></td>
+            <td class="col-us" data-col="Mallard Legacy Partners"><span class="cell"><svg viewBox="0 0 24 24" width="16" height="16"><use href="#i-check"/></svg>Seth invests personally in every offering</span></td>
+            <td class="col-alt" data-col="Public REIT"><span class="cell"><svg viewBox="0 0 24 24" width="16" height="16"><use href="#i-minus"/></svg>Management compensated in stock</span></td>
+            <td class="col-alt" data-col="Your own rental"><span class="cell"><svg viewBox="0 0 24 24" width="16" height="16"><use href="#i-check"/></svg>All of it is yours</span></td>
+            <td class="col-alt" data-col="Index fund"><span class="cell"><svg viewBox="0 0 24 24" width="16" height="16"><use href="#i-minus"/></svg>Not applicable</span></td>
           </tr>
           <tr>
             <th scope="row">Who fixes the water heater</th>
-            <td class="col-us"><span class="cell"><svg viewBox="0 0 24 24" width="16" height="16"><use href="#i-check"/></svg>An on-site team you never meet</span></td>
-            <td class="col-alt"><span class="cell"><svg viewBox="0 0 24 24" width="16" height="16"><use href="#i-check"/></svg>Somebody else</span></td>
-            <td class="col-alt"><span class="cell"><svg viewBox="0 0 24 24" width="16" height="16"><use href="#i-minus"/></svg>You, at 2 a.m.</span></td>
-            <td class="col-alt"><span class="cell"><svg viewBox="0 0 24 24" width="16" height="16"><use href="#i-check"/></svg>Nobody</span></td>
+            <td class="col-us" data-col="Mallard Legacy Partners"><span class="cell"><svg viewBox="0 0 24 24" width="16" height="16"><use href="#i-check"/></svg>An on-site team you never meet</span></td>
+            <td class="col-alt" data-col="Public REIT"><span class="cell"><svg viewBox="0 0 24 24" width="16" height="16"><use href="#i-check"/></svg>Somebody else</span></td>
+            <td class="col-alt" data-col="Your own rental"><span class="cell"><svg viewBox="0 0 24 24" width="16" height="16"><use href="#i-minus"/></svg>You, at 2 a.m.</span></td>
+            <td class="col-alt" data-col="Index fund"><span class="cell"><svg viewBox="0 0 24 24" width="16" height="16"><use href="#i-check"/></svg>Nobody</span></td>
           </tr>
         </tbody>
       </table>
@@ -735,7 +738,7 @@
   </div>
 </footer>
 
-<script src="assets/js/main.js?v=9e6e3157" defer></script>
+<script src="assets/js/main.js?v=5022e0fa" defer></script>
 <script src="assets/js/agent.js?v=f41154ce" defer></script>
 </body>
 </html>

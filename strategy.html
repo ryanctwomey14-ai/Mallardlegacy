@@ -17,7 +17,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <script>document.documentElement.classList.add('js');</script>
-<link rel="stylesheet" href="assets/css/main.css?v=c9207de8">
+<link rel="stylesheet" href="assets/css/main.css?v=e7bba80f">
 
 </head>
 <body>
@@ -61,6 +61,7 @@
 </header>
 
 <div class="drawer" id="drawer" data-drawer data-open="false">
+  <a href="index.html">Home</a>
   <a href="strategy.html">Strategy</a>
   <a href="about.html">About</a>
   <a href="faq.html">FAQ</a>
@@ -140,6 +141,14 @@
         <input class="calc__range" type="range" min="100000" max="1000000" step="25000"
                value="100000" data-calc-range aria-label="Amount invested, in dollars">
         <div class="calc__scale" aria-hidden="true"><span>$100k</span><span>$1M</span></div>
+
+        <div class="calc__hold">
+          <label class="calc__label" for="calcHold">Hold period
+            <span class="calc__holdValue" data-calc="holdLabel">7 years</span></label>
+          <input class="calc__range" id="calcHold" type="range" min="5" max="7" step="1"
+                 value="7" data-calc-hold aria-label="Hold period in years">
+          <div class="calc__scale" aria-hidden="true"><span>5 yrs</span><span>6 yrs</span><span>7 yrs</span></div>
+        </div>
       </div>
 
       <div class="calc__results" role="status" aria-live="polite">
@@ -194,11 +203,11 @@
       </figure>
 
       <p class="calc__foot">
-        Over a planned hold of five to seven years, against a target investor IRR of
-        15&ndash;17%. The split assumes quarterly distributions averaging 5% of invested
-        capital annually in the lower case and 7% in the upper case, with the balance
-        realised when the property is sold. The actual split depends on the individual
-        property and its business plan.
+        Against a target investor IRR of 15&ndash;17%. The split assumes quarterly
+        distributions averaging 5% of invested capital annually in the lower case and 7%
+        in the upper case, with the balance realised when the property is sold. A shorter
+        hold means less accumulated cash flow and more of the return arriving at sale.
+        The actual split depends on the individual property and its business plan.
       </p>
     </div>
 
@@ -317,7 +326,7 @@
     </div>
   </div>
 </footer>
-<script src="assets/js/main.js?v=9e6e3157" defer></script>
+<script src="assets/js/main.js?v=5022e0fa" defer></script>
 <script src="assets/js/agent.js?v=f41154ce" defer></script>
 </body>
 </html>
