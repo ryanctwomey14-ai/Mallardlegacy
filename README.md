@@ -7,6 +7,25 @@ The reasoning behind every structural decision is in [`STRATEGY.md`](STRATEGY.md
 
 ---
 
+## Going live on mallardlegacypartners.com
+
+Two deploy scripts, and picking the wrong one is the failure mode:
+
+| Script | Branch state | Use when |
+|---|---|---|
+| `tools/deploy_preview.sh` | robots `Disallow: /`, `noindex` on every page | client review on the github.io URL |
+| `tools/deploy_live.sh` | indexable, writes `CNAME` | the real domain, after approval |
+
+**The preview deploy blocks search engines on purpose.** If the domain is pointed at the
+branch while it still carries that treatment, the site is live and invisible to Google with
+nothing obviously wrong on screen. `deploy_live.sh` refuses to run if any page that should be
+indexed still carries `noindex`, or if `robots.txt` blocks the whole site.
+
+DNS today: the domain is registered at Wix, uses Wix nameservers (`ns2/ns3.wixdns.net`), and
+currently resolves to Wix hosting (`185.230.63.x`). The site's canonical tags already declare
+**www.mallardlegacypartners.com**, so www is the primary host and the apex should redirect to
+it.
+
 ## Live draft for client review
 
 **<https://ryanctwomey14-ai.github.io/Mallardlegacy/>**
