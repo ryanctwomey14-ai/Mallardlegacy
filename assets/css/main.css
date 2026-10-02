@@ -688,6 +688,10 @@ a[href^="mailto:"],a[href^="tel:"]{overflow-wrap:anywhere}
 .section--forest .field input,.section--forest .field select,.section--forest .field textarea{
   background:rgba(244,240,231,.07);border-color:rgba(244,240,231,.28);color:var(--cream-50)}
 .formNote{font-size:12px;color:var(--text-faint);line-height:1.6}
+/* Honeypot wrapper. Off-screen rather than display:none or visibility:hidden,
+   both of which a capable bot checks before deciding whether to fill a field. */
+.hp{position:absolute!important;left:-9999px!important;top:auto!important;
+  width:1px!important;height:1px!important;overflow:hidden!important}
 .form-status{font-size:14px;padding:16px;border-radius:var(--radius);display:none;line-height:1.6}
 .form-status[data-state="ok"]{display:block;background:rgba(44,110,89,.1);
   border:1px solid var(--forest-600);color:var(--forest-700)}
