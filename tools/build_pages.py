@@ -903,6 +903,15 @@ contact_body = page_head(
           <p class="formNote" style="margin-bottom:var(--s-2)">Every field except the last is required
             so the first call can be useful rather than introductory.</p>
 
+          <!-- Honeypot. Positioned off-screen rather than display:none, which
+               the better scrapers check for. tabindex="-1" keeps it out of the
+               keyboard path and aria-hidden keeps it off screen readers, so no
+               human is ever offered it. Anything that fills it is automated. -->
+          <div class="hp" aria-hidden="true">
+            <label for="cwebsite">Website</label>
+            <input id="cwebsite" name="website" type="text" tabindex="-1" autocomplete="off">
+          </div>
+
           <div class="field">
             <label for="cname">Full name <span class="req" aria-hidden="true">*</span></label>
             <input id="cname" name="name" type="text" autocomplete="name" required

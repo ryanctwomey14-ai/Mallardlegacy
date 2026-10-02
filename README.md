@@ -187,9 +187,33 @@ with wording that owns the fault. Both paths log to the console.
   Reading UTMs at submit time would lose them for anyone who lands on `/` and then clicks
   through to `/contact.html`.
 
+**Spam handling.** Two tiers, because they warrant different treatment:
+
+- **Honeypot** (`name="website"`, off-screen, `tabindex="-1"`, `aria-hidden`). No human is
+  ever offered that field, so anything in it is automated. Those submissions get a convincing
+  success message and are silently discarded — telling a bot it failed just invites a retry
+  with the field left blank. Verified: nothing reaches the endpoint.
+- **Timing** is *not* a gate. A password-manager autofill plus a fast click can beat any
+  threshold worth setting, and silently dropping a real investor enquiry is far worse than
+  letting a bot through. A submission under 2s is flagged as `suspected_bot: true` in the
+  payload and **still delivered**. Filter on it in GHL only if junk becomes a problem.
+
+This matters more once the webhook is live than it does now: with no endpoint, bot traffic
+goes nowhere. With one, every bot submission becomes a contact record, possibly an opportunity,
+and possibly an auto-reply.
+
+**The `summary` key.** A preformatted text block carrying the whole submission. If the custom
+fields never get created, the entire enquiry drops into a contact note via one merge field
+instead of a dozen. Ignored if the fields do exist.
+
 **Still open:** `thank-you.html` exists but nothing links to it. The form shows an inline
 success message instead. Redirecting on success would make the conversion trackable as a
 pageview — a one-line change, but it replaces the current inline behaviour.
+
+> **Dead code:** `tools/build_pages.py` has a second `data-form` block (~line 696), a
+> "Send me the checklist" lead magnet left over from the deleted Insights page. It is not
+> rendered on any page and generates nothing. Left in place rather than deleted in case the
+> page is ever restored.
 
 ### 4. Connect the investor portal
 

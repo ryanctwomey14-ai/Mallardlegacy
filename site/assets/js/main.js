@@ -267,6 +267,8 @@
 
   document.querySelectorAll('[data-form]').forEach(function (form) {
     var status = form.querySelector('.form-status');
+    // Used only to flag implausibly fast submissions. Not a gate -- see below.
+    var shownAt = Date.now();
 
     var validate = function (input) {
       var field = input.closest('.field');
@@ -298,7 +300,7 @@
       };
       var name = splitName(get('name'));
       var attr = attribution();
-      return {
+      var data = {
         first_name: name.first,
         last_name: name.last,
         full_name: get('name'),
@@ -318,6 +320,28 @@
         referrer: attr.referrer,
         landing_page: attr.landing_page
       };
+
+      /* One preformatted block alongside the structured keys. If Seth never
+         creates the custom fields, the whole submission can still be dropped
+         into a contact note with a single merge field instead of wiring up
+         a dozen. Ignored entirely if the fields do exist. */
+      var campaign = [attr.utm_source, attr.utm_medium, attr.utm_campaign]
+        .filter(Boolean).join(' / ');
+      data.summary = [
+        data.full_name,
+        data.email + '  |  ' + data.phone,
+        '',
+        'Accredited:  ' + data.accredited_status,
+        'Considering: ' + data.capital_range,
+        '',
+        'Notes: ' + (data.notes || '(none)'),
+        '',
+        'Source:    ' + data.source_page + (campaign ? '  |  ' + campaign : ''),
+        'Landed on: ' + data.landing_page,
+        'Submitted: ' + data.submitted_at
+      ].join('\n');
+
+      return data;
     }
 
     form.addEventListener('submit', function (e) {
@@ -330,6 +354,29 @@
         return;
       }
 
+      /* Bot handling, in two tiers.
+
+         The honeypot is decisive: no human is offered that field, so anything
+         in it is automated. Those get a convincing success message and are
+         dropped on the floor -- telling a bot it failed just invites a retry
+         with the field left blank.
+
+         Timing is NOT decisive. A password-manager autofill plus a fast click
+         can beat any threshold worth setting, and silently discarding a real
+         investor enquiry is far worse than letting a bot through. So a quick
+         submission is flagged in the payload and still delivered, and Seth can
+         filter on it in GHL if junk ever becomes a problem. */
+      var trap = form.querySelector('[name="website"]');
+      if (trap && trap.value) {
+        if (status) {
+          status.dataset.state = 'ok';
+          status.textContent = form.dataset.success ||
+            'Thank you. Seth will personally reply within one business day.';
+        }
+        form.reset();
+        return;
+      }
+
       var btn = form.querySelector('button[type="submit"]');
       var restore = function () {
         if (btn) { btn.disabled = false; btn.textContent = btn.dataset.label; }
@@ -337,6 +384,7 @@
       if (btn) { btn.disabled = true; btn.dataset.label = btn.textContent; btn.textContent = 'Sending…'; }
 
       var payload = collect();
+      payload.suspected_bot = (Date.now() - shownAt) < 2000;
 
       var succeed = function () {
         form.reset();
