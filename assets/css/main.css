@@ -693,6 +693,21 @@ a[href^="mailto:"],a[href^="tel:"]{overflow-wrap:anywhere}
   border:1px solid var(--forest-600);color:var(--forest-700)}
 .section--dark .form-status[data-state="ok"],.section--forest .form-status[data-state="ok"]{
   color:var(--gold-300);border-color:var(--gold-500);background:rgba(183,140,52,.12)}
+/* A handoff is not a failure. The webhook simply is not wired yet, so the
+   visitor is being asked to finish by email — neutral, not alarming. */
+.form-status[data-state="info"]{display:block;background:rgba(183,140,52,.08);
+  border:1px solid rgba(183,140,52,.42);color:var(--text)}
+.form-status[data-state="info"] a{color:var(--gold-600);font-weight:600;
+  text-decoration:underline;text-underline-offset:3px}
+.section--dark .form-status[data-state="info"],.section--forest .form-status[data-state="info"]{
+  color:var(--cream-50);border-color:var(--gold-500);background:rgba(183,140,52,.14)}
+.section--dark .form-status[data-state="info"] a,.section--forest .form-status[data-state="info"] a{
+  color:var(--gold-300)}
+.form-status[data-state="err"]{display:block;background:rgba(176,58,38,.07);
+  border:1px solid rgba(176,58,38,.45);color:#B03A26}
+.form-status[data-state="err"] a{color:inherit;text-underline-offset:3px}
+.section--dark .form-status[data-state="err"],.section--forest .form-status[data-state="err"]{
+  color:#F0A899;border-color:rgba(240,168,153,.5);background:rgba(240,168,153,.1)}
 
 /* ---------- Footer ---------- */
 .footer{background:var(--forest-950);color:rgba(244,240,231,.74);
