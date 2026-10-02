@@ -131,21 +131,65 @@ sponsor with no completed deals.** They are labelled as underwriting targets on 
 the hero-card disclaimer was removed at the client's request. Confirm with counsel that the
 remaining footer disclosures are sufficient for 506(c).
 
-### 3. Wire up the forms
+### 3. Finish the CRM connection
 
-`assets/js/main.js` §7 simulates submission with a `setTimeout`. Replace it with a real
-endpoint — Juniper Square, HubSpot, Formspark, or a serverless function:
+The contact form posts into **GoHighLevel**, not into Peak Operator. Peak Operator is a
+*reader* — it pulls contacts and pipeline stages from the GHL sub-account on a background
+sync. Writing to GHL means the lead reaches both systems; writing to Peak Operator directly
+would reach neither.
 
-```js
-const res = await fetch('https://your-endpoint', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify(Object.fromEntries(new FormData(form)))
-});
+```
+contact.html  ─POST─>  GHL inbound webhook  ─>  GHL workflow  ─sync─>  Peak Operator
 ```
 
-On success, either show the inline status (current behaviour) or redirect to `thank-you.html`
-so the conversion is trackable as a pageview.
+**Known IDs** (from the Peak Operator CRM Connection screen):
+
+| | |
+|---|---|
+| GHL sub-account / Location ID | `BrNaF2jt8KhCDbjE9rDx` |
+| Opportunity pipeline ID | `dRpZdHvSra46ZwSZFLNm` |
+
+**The one thing still missing** is the webhook URL. In the GHL sub-account:
+*Automation → Workflows → Create Workflow → Add New Trigger → Inbound Webhook*.
+Copy the URL, then **publish the workflow** — a draft workflow accepts posts and silently
+discards them, which is the single most common way this setup appears to work but does not.
+
+Paste it into one line, `assets/js/main.js` §7:
+
+```js
+var CRM_WEBHOOK = 'https://services.leadconnectorhq.com/hooks/BrNaF2jt8KhCDbjE9rDx/webhook-trigger/...';
+```
+
+**Custom fields to create in GHL first**, or the mapping has nowhere to land. `first_name`,
+`last_name`, `email` and `phone` map to standard fields; everything below needs creating:
+
+| Payload key | Field type |
+|---|---|
+| `accredited_status` | Dropdown (single) |
+| `capital_range` | Dropdown (single) |
+| `notes` | Multi-line text |
+| `source`, `source_page`, `landing_page`, `referrer` | Text |
+| `utm_source`, `utm_medium`, `utm_campaign`, `utm_term`, `utm_content` | Text |
+| `submitted_at` | Text (ISO 8601) |
+
+**Behaviour before the URL is set.** The form never fakes success. With no webhook configured
+it shows a neutral "one last step" panel with a `mailto:` link prefilled with every answer, and
+does *not* clear the form. If a webhook is set and the POST fails, the same escape hatch appears
+with wording that owns the fault. Both paths log to the console.
+
+**Two implementation details worth knowing before changing them:**
+
+- The POST sends `Content-Type: text/plain;charset=UTF-8`. That keeps it a CORS *simple
+  request* so the browser skips the preflight `OPTIONS` call, which the hooks endpoint does not
+  reliably answer. GHL parses the body as JSON regardless. Switching to `application/json`
+  reintroduces the preflight and can silently break submissions in some browsers.
+- Attribution is captured on the **landing** page into `sessionStorage` and read back at submit.
+  Reading UTMs at submit time would lose them for anyone who lands on `/` and then clicks
+  through to `/contact.html`.
+
+**Still open:** `thank-you.html` exists but nothing links to it. The form shows an inline
+success message instead. Redirecting on success would make the conversion trackable as a
+pageview — a one-line change, but it replaces the current inline behaviour.
 
 ### 4. Connect the investor portal
 

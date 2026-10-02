@@ -188,8 +188,83 @@
   });
 
   /* ---- 7. Forms -------------------------------------------------------
-     Front-end validation and a success state. Wire the fetch() to a real
-     endpoint (see README) before launch — nothing is transmitted today. */
+     Validation, then a real POST into GoHighLevel.
+
+     ARCHITECTURE -- read this before pointing the endpoint anywhere else.
+     Peak Operator, the dashboard Seth actually looks at, does not receive
+     leads. It *pulls* them from the GoHighLevel sub-account on a background
+     sync. So the site writes to GHL and lets that existing sync carry the
+     lead the rest of the way. Posting directly to Peak Operator would create
+     a second source of truth that never reaches GHL, and posting to both
+     would duplicate every contact.
+
+     The target is a GHL Workflow with an Inbound Webhook trigger. That URL
+     is write-only -- it accepts a payload and grants no read access -- which
+     is why it is safe in client-side JS where an API token would never be.
+
+     GHL sub-account / Location ID: BrNaF2jt8KhCDbjE9rDx
+     Opportunity pipeline ID:       dRpZdHvSra46ZwSZFLNm
+     --------------------------------------------------------------------- */
+
+  // ==> THE ONLY LINE THAT CHANGES when the webhook is created in GHL.
+  //     Expected shape:
+  //     https://services.leadconnectorhq.com/hooks/BrNaF2jt8KhCDbjE9rDx/webhook-trigger/<id>
+  var CRM_WEBHOOK = '';
+
+  var FALLBACK_EMAIL = 'seth.phillips@mallardlegacypartners.com';
+
+  /* Attribution has to be captured on the LANDING page and carried forward,
+     not read at submit time. Someone arrives on / with ?utm_source=... then
+     clicks through to contact.html, by which point the query string is gone
+     and document.referrer just says mallardlegacypartners.com. Stash once,
+     read back at submit. */
+  var ATTR_KEY = 'mlp_attribution';
+  function attribution() {
+    var stored = null;
+    try { stored = JSON.parse(sessionStorage.getItem(ATTR_KEY) || 'null'); } catch (err) {}
+    if (stored) return stored;
+    var q = new URLSearchParams(window.location.search);
+    var fresh = {
+      utm_source: q.get('utm_source') || '',
+      utm_medium: q.get('utm_medium') || '',
+      utm_campaign: q.get('utm_campaign') || '',
+      utm_term: q.get('utm_term') || '',
+      utm_content: q.get('utm_content') || '',
+      referrer: document.referrer || '',
+      landing_page: window.location.pathname
+    };
+    try { sessionStorage.setItem(ATTR_KEY, JSON.stringify(fresh)); } catch (err) {}
+    return fresh;
+  }
+  attribution();   // run on every page load, not only pages that have a form
+
+  // GHL stores first and last separately. Sending the whole string as
+  // first_name leaves every contact with a blank surname, which breaks
+  // sorting and any "Hi {{last_name}}" merge field downstream.
+  function splitName(full) {
+    var parts = String(full || '').trim().replace(/\s+/g, ' ').split(' ');
+    var first = parts.shift() || '';
+    return { first: first, last: parts.join(' ') };
+  }
+
+  // If the POST cannot be delivered we hand the visitor a prefilled email
+  // rather than losing them. A lead that arrives in an inbox is worth far
+  // more than a tidy error message.
+  function mailtoFallback(d) {
+    var body = [
+      'Name: ' + d.full_name,
+      'Email: ' + d.email,
+      'Phone: ' + d.phone,
+      'Accredited status: ' + d.accredited_status,
+      'Capital considered: ' + d.capital_range,
+      '',
+      d.notes || '(no additional notes)'
+    ].join('\n');
+    return 'mailto:' + FALLBACK_EMAIL +
+      '?subject=' + encodeURIComponent('Investor enquiry from mallardlegacypartners.com') +
+      '&body=' + encodeURIComponent(body);
+  }
+
   document.querySelectorAll('[data-form]').forEach(function (form) {
     var status = form.querySelector('.form-status');
 
@@ -207,7 +282,7 @@
       return ok;
     };
 
-    // Validate on blur, not on keystroke — correcting someone mid-word is hostile
+    // Validate on blur, not on keystroke - correcting someone mid-word is hostile
     form.querySelectorAll('input, select, textarea').forEach(function (input) {
       input.addEventListener('blur', function () { validate(input); });
       input.addEventListener('input', function () {
@@ -215,6 +290,35 @@
         if (field && field.dataset.invalid === 'true') validate(input);
       });
     });
+
+    function collect() {
+      var get = function (n) {
+        var el = form.querySelector('[name="' + n + '"]');
+        return el ? el.value.trim() : '';
+      };
+      var name = splitName(get('name'));
+      var attr = attribution();
+      return {
+        first_name: name.first,
+        last_name: name.last,
+        full_name: get('name'),
+        email: get('email'),
+        phone: get('phone'),
+        accredited_status: get('status'),
+        capital_range: get('amount'),
+        notes: get('notes'),
+        source: 'Website - mallardlegacypartners.com',
+        source_page: window.location.pathname,
+        submitted_at: new Date().toISOString(),
+        utm_source: attr.utm_source,
+        utm_medium: attr.utm_medium,
+        utm_campaign: attr.utm_campaign,
+        utm_term: attr.utm_term,
+        utm_content: attr.utm_content,
+        referrer: attr.referrer,
+        landing_page: attr.landing_page
+      };
+    }
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
@@ -225,20 +329,78 @@
         invalid[0].scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center' });
         return;
       }
+
       var btn = form.querySelector('button[type="submit"]');
+      var restore = function () {
+        if (btn) { btn.disabled = false; btn.textContent = btn.dataset.label; }
+      };
       if (btn) { btn.disabled = true; btn.dataset.label = btn.textContent; btn.textContent = 'Sending…'; }
 
-      // Replace with your CRM / form endpoint. See README.md.
-      window.setTimeout(function () {
+      var payload = collect();
+
+      var succeed = function () {
         form.reset();
-        if (btn) { btn.disabled = false; btn.textContent = btn.dataset.label; }
+        restore();
         if (status) {
           status.dataset.state = 'ok';
           status.textContent = form.dataset.success ||
             'Thank you. Seth will personally reply within one business day.';
           status.focus();
         }
-      }, 700);
+      };
+
+      /* Never claim a success we cannot stand behind. Two different things
+         can go wrong, and the visitor should not be shown the same sentence
+         for both:
+
+         'handoff'  - no webhook configured yet. Expected, not a fault, and
+                      must not read as a broken site. Framed as the last
+                      step of the flow rather than a failure.
+         'error'    - a webhook exists and the POST genuinely failed. Owns
+                      the fault, offers the same escape hatch.
+
+         In both cases the form is NOT reset, so nothing the visitor typed is
+         lost, and the prefilled email carries every field. */
+      var handoff = function (mode, reason) {
+        restore();
+        if (window.console) console.warn('[mallard] lead not posted (' + mode + '):', reason);
+        if (!status) return;
+        var link = '<a href="' + mailtoFallback(payload) + '">';
+        status.dataset.state = mode === 'handoff' ? 'info' : 'err';
+        status.innerHTML = mode === 'handoff'
+          ? 'One last step — ' + link + 'send these details to Seth</a>. ' +
+            'Your answers are already filled in, and he replies personally ' +
+            'within one business day.'
+          : 'That did not send — the fault is ours, not yours. ' +
+            link + 'Email it to Seth directly</a> and nothing is lost.';
+        status.focus();
+      };
+
+      if (!CRM_WEBHOOK) { handoff('handoff', 'CRM_WEBHOOK is not configured'); return; }
+
+      // A hung request must not strand the button on "Sending..." forever.
+      var ctrl = typeof AbortController === 'function' ? new AbortController() : null;
+      var timer = window.setTimeout(function () { if (ctrl) ctrl.abort(); }, 10000);
+
+      fetch(CRM_WEBHOOK, {
+        method: 'POST',
+        // text/plain keeps this a CORS "simple request", so the browser skips
+        // the preflight OPTIONS call. GHL parses the body as JSON regardless
+        // of the declared type. Sending application/json triggers a preflight
+        // that the hooks endpoint does not reliably answer.
+        headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
+        body: JSON.stringify(payload),
+        signal: ctrl ? ctrl.signal : undefined
+      })
+        .then(function (res) {
+          window.clearTimeout(timer);
+          if (!res.ok) throw new Error('HTTP ' + res.status);
+          succeed();
+        })
+        .catch(function (err) {
+          window.clearTimeout(timer);
+          handoff('error', err && err.message ? err.message : 'network error');
+        });
     });
   });
 
